@@ -134,8 +134,31 @@ projectCards.forEach(card => {
     projectTitle.textContent = data.title;
     projectDesc.textContent = data.desc;
     projectTech.innerHTML = data.tech.map(t => `<span class="tags"><span style="margin-right:8px;background:transparent;color:var(--accent1)">${t}</span></span>`).join('');
-    modalDemo.href = '#';
-    modalCode.href = '#';
+    // DEMO button
+    if (data.demo) {
+      modalDemo.onclick = () => {
+        window.open(data.demo, "_blank"); // opens Snake.html in new tab
+      };
+      modalDemo.style.pointerEvents = "auto";
+      modalDemo.style.opacity = "1";
+    } else {
+      modalDemo.onclick = null;
+      modalDemo.style.pointerEvents = "none";
+      modalDemo.style.opacity = "0.4"; // dim if no demo
+    }
+
+    // CODE button
+    if (data.code) {
+      modalCode.onclick = () => {
+        window.open(data.code, "_blank"); // opens GitHub
+      };
+      modalCode.style.pointerEvents = "auto";
+      modalCode.style.opacity = "1";
+    } else {
+      modalCode.onclick = null;
+      modalCode.style.pointerEvents = "none";
+      modalCode.style.opacity = "0.4"; // dim if no code
+    }
     modal.classList.add('show');
     modal.setAttribute('aria-hidden','false');
   });
